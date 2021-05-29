@@ -1,5 +1,7 @@
 'use strict';
 const concat = require('../utils').concat;
+const path = require("path");
+const hyperlinker = require("hyperlinker");
 
 function isRelative (module) {
   return module.startsWith('./') || module.startsWith('../');
@@ -8,7 +10,10 @@ function isRelative (module) {
 function formatFileList (files) {
   const length = files.length;
   if (!length) return '';
-  return ` in ${files[0]}${files[1] ? `, ${files[1]}` : ''}${length > 2 ? ` and ${length - 2} other${length === 3 ? '' : 's'}` : ''}`;
+  let fileLinks = files.map( fileRelativePath => {
+    return hyperlinker( fileRelativePath, path.join( process.cwd(), fileRelativePath ))
+  })
+  return ` in ${fileLinks[0]}${fileLinks[1] ? `, ${fileLinks[1]}` : ''}${length > 2 ? ` and ${length - 2} other${length === 3 ? '' : 's'}` : ''}`;
 }
 
 function formatGroup (group) {

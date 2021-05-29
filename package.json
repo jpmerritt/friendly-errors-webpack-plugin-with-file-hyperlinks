@@ -65,6 +65,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "error-stack-parser": "^2.0.2",
+    "hyperlinker": "^1.0.0",
     "string-width": "^2.0.0",
     "strip-ansi": "^5"
   }
